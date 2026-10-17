@@ -7,3 +7,6 @@ class Tour(models.Model):
      destination_country = models.CharField(max_length=100)
      number_of_nights = models.IntegerField()
      price = models.IntegerField()
+
+     def __str__(self):
+          return (f"Id: {self.id}, from: {self.origin_country}, to:{self.destination_country}, nights: {self.number_of_nights}, price: {self.price}")

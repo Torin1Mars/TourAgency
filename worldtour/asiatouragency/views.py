@@ -1,6 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+
+from .models import Tour
 
 # Create your views here.
 def index(request:str):
-    return HttpResponse("Hello world!")
+    tours = Tour.objects.all()
+    context = {'tours' :tours}
+    return render(request, "tours/index.html", context)
