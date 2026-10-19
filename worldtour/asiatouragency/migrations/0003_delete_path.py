@@ -11,16 +11,5 @@ class Migration(migrations.Migration):
     operations = [
         migrations.DeleteModel(
             name='Path',
-        ),
-
-        migrations.CreateModel(
-            name='Tour',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('origin_country', models.CharField(max_length=100)),
-                ('destination_country', models.CharField(max_length=100)),
-                ('number_of_nights', models.IntegerField()),
-                ('price', models.IntegerField()),
-            ],
-        ),
+        )
     ]
