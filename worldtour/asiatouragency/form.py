@@ -1,10 +1,22 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.forms import CharField
 
-class ContactForm(forms.Form):
-    name = forms.CharField(max_length=60)
-    email = forms.EmailField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea)
 
-    def send_email(self):
-        print(f"Sending email from {self.cleaned_data
-        ['email']} with message: {self.cleaned_data['message']}")
+class RegisterForm(forms.ModelForm):
+    password = CharField(widget=forms.PasswordInput, max_length=50)
+    password_confirm = CharField(widget=forms.PasswordInput, label="Confirm Password")
+
+    class Meta():
+        model = User
+        fields = ["username", "password", "password_confirm"]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password_confirm = cleaned_data.get("password_confirm")
+
+        if password and password_confirm and password != password_confirm:
+            raise forms.ValidationError("Your password doesn't match")
+
+        return cleaned_data
