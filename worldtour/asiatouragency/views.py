@@ -9,8 +9,8 @@ from django.views import View
 from .form import RegisterForm
 
 # Views
-def home(request):
-    return render(request, "auth1_app/home.html")
+'''def home(request):
+    return render(request, "auth1_app/home.html")'''
 
 def register_view(request):
     if request.method == "POST":
@@ -24,13 +24,15 @@ def register_view(request):
 
             return redirect("home")
 
-        else:
-            empty_form = RegisterForm()
-            return render(request,"accounts/register.html", {"form":empty_form} )
+    else:
+        form = RegisterForm()
+    return render(request,"accounts/register.html", {"form":form} )
 
 
 def logging_view(request):
-    if request.methoud == "POST":
+    error_message = None
+
+    if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("username")
 
@@ -41,15 +43,14 @@ def logging_view(request):
 
             next_url = request.POST.get('next') or request.Get.get('next') or "home"
             return redirect(next_url)
-
         else:
             error_message = "Invalid Credentials"
 
-    return render(request, "accounts/logging.html", {"error":error_message})
+    return render(request, "accounts/login.html", {"error":error_message})
 
 
 def logout_view(request):
-    if request.methoud == "POST":
+    if request.method == "POST":
         logout(request)
         return redirect("loging")
     else:

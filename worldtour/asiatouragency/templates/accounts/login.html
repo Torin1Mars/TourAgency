@@ -7,7 +7,7 @@
     <title>Loging page</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css'%}">
 
-{%comment%} Style for error message{%comment%}
+{%comment%} Style for error message{%endcomment%}
     <style>
         .error{
             color:red
@@ -17,7 +17,7 @@
 <body>
 <div class = "container" >
     <h2>Loging</h2>
-    <form method="post" action="{%url 'loging' %}">
+    <form method="post" action="{%url 'login' %}">
         {% csrf_token %}
         {%comment%} Hidden input{%comment%}
         <input type="hidden" name="text" value="{%next%}">
@@ -33,7 +33,7 @@
     <button type="submit">Logging</button>
     </form>
 
-    {%comment%} Checking for errors {%comment%}
+    {%comment%} Checking for errors {%endcomment%}
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
